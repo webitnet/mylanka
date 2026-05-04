@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+/* RIDNE — Design System tokens
+ * Source of truth: docs/DESIGN-SYSTEM.md
+ */
+
+:root {
+  /* Brand palette */
+  --color-bark: #3D2B1F;
+  --color-terracotta: #C8593A;
+  --color-gold: #D4A843;
+  --color-sage: #7A9E7E;
+  --color-wheat: #F2E4C4;
+  --color-cream: #FAF5EC;
+  --color-ink: #1E1510;
+  --color-muted: #8B7D6B;
+  --color-border: #E0D5C7;
+
+  /* Semantic */
+  --color-error: #C8593A;
+  --color-success: #7A9E7E;
+  --color-warning: #D4A843;
+
+  /* Page defaults */
+  --background: var(--color-cream);
+  --foreground: var(--color-ink);
+}
+
+@theme inline {
+  /* Brand colors — exposed as Tailwind utilities (bg-bark, text-terracotta, border-border, etc.) */
+  --color-bark: var(--color-bark);
+  --color-terracotta: var(--color-terracotta);
+  --color-gold: var(--color-gold);
+  --color-sage: var(--color-sage);
+  --color-wheat: var(--color-wheat);
+  --color-cream: var(--color-cream);
+  --color-ink: var(--color-ink);
+  --color-muted: var(--color-muted);
+  --color-border: var(--color-border);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* Type stack — wired through next/font in layout.tsx */
+  --font-display: var(--font-playfair), Georgia, serif;
+  --font-ui: var(--font-unbounded), system-ui, sans-serif;
+  --font-body: var(--font-martel), Georgia, serif;
+  --font-sans: var(--font-body);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+}
