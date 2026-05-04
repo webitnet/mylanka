@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Unbounded, Martel } from "next/font/google";
-import "./globals.css";
+import { notFound } from "next/navigation";
+import { hasLocale, NextIntlClientProvider } from "next-intl";
+import { setRequestLocale } from "next-intl/server";
+import { routing } from "@/i18n/routing";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
+import "../globals.css";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -27,18 +33,32 @@ export const metadata: Metadata = {
     "Handmade Ukrainian souvenirs: ceramics, textiles, woodwork, jewelry, and regional gifts.",
 };
 
-export default function RootLayout({
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
+export default async function LocaleLayout({
   children,
-}: Readonly<{
+  params,
+}: {
   children: React.ReactNode;
-}>) {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) notFound();
+  setRequestLocale(locale);
+
   return (
     <html
-      lang="uk"
+      lang={locale}
       className={`${playfair.variable} ${unbounded.variable} ${martel.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-cream text-ink">
-        {children}
+        <NextIntlClientProvider>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </NextIntlClientProvider>
       </body>
     </html>
   );

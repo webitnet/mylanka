@@ -1,0 +1,51 @@
+{
+  "Brand": {
+    "name": "Рідне",
+    "tagline": "Handmade · Ukraine · Souvenirs"
+  },
+  "Nav": {
+    "catalog": "Catalog",
+    "categories": "Categories",
+    "about": "About",
+    "contact": "Contact",
+    "shipping": "Shipping",
+    "search": "Search",
+    "cart": "Cart"
+  },
+  "Locale": {
+    "switchLabel": "Language",
+    "uk": "UA",
+    "en": "EN"
+  },
+  "Home": {
+    "heroTitle": "Handmade from Ukraine",
+    "heroSubtitle": "Ceramics, textiles, woodwork, jewelry, and regional souvenirs from local artisans.",
+    "heroCtaShop": "Browse catalog",
+    "heroCtaStory": "Our story",
+    "featuredTitle": "Featured",
+    "featuredSubtitle": "What we're proud of",
+    "newArrivalsTitle": "New arrivals",
+    "categoriesTitle": "Categories",
+    "viewAll": "View all"
+  },
+  "Product": {
+    "addToCart": "Add to cart",
+    "outOfStock": "Out of stock",
+    "inStock": "In stock",
+    "lowStock": "Low stock",
+    "new": "New",
+    "sale": "Sale",
+    "featured": "Featured",
+    "from": "from"
+  },
+  "Currency": {
+    "uah": "₴"
+  },
+  "Footer": {
+    "rights": "© {year} Рідне. All rights reserved.",
+    "madeIn": "Made in Ukraine",
+    "newsletter": "Subscribe to our newsletter",
+    "newsletterPlaceholder": "your@email.com",
+    "subscribe": "Subscribe"
+  }
+}

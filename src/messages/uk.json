@@ -1,0 +1,51 @@
+{
+  "Brand": {
+    "name": "Рідне",
+    "tagline": "Handmade · Україна · Сувеніри"
+  },
+  "Nav": {
+    "catalog": "Каталог",
+    "categories": "Категорії",
+    "about": "Про нас",
+    "contact": "Контакти",
+    "shipping": "Доставка",
+    "search": "Пошук",
+    "cart": "Кошик"
+  },
+  "Locale": {
+    "switchLabel": "Мова",
+    "uk": "UA",
+    "en": "EN"
+  },
+  "Home": {
+    "heroTitle": "Хендмейд з України",
+    "heroSubtitle": "Кераміка, текстиль, дерево, прикраси та регіональні сувеніри від місцевих майстрів.",
+    "heroCtaShop": "До каталогу",
+    "heroCtaStory": "Наша історія",
+    "featuredTitle": "Обрані товари",
+    "featuredSubtitle": "Те, чим пишаємось",
+    "newArrivalsTitle": "Новинки",
+    "categoriesTitle": "Категорії",
+    "viewAll": "Дивитись усе"
+  },
+  "Product": {
+    "addToCart": "До кошика",
+    "outOfStock": "Немає в наявності",
+    "inStock": "В наявності",
+    "lowStock": "Залишилось мало",
+    "new": "Новинка",
+    "sale": "Знижка",
+    "featured": "Вибір редактора",
+    "from": "від"
+  },
+  "Currency": {
+    "uah": "₴"
+  },
+  "Footer": {
+    "rights": "© {year} Рідне. Усі права захищені.",
+    "madeIn": "Зроблено в Україні",
+    "newsletter": "Підпишіться на новини",
+    "newsletterPlaceholder": "your@email.com",
+    "subscribe": "Підписатись"
+  }
+}
