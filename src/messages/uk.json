@@ -41,6 +41,58 @@
   "Currency": {
     "uah": "₴"
   },
+  "Catalog": {
+    "title": "Каталог",
+    "resultsCount": "Знайдено {count, plural, one {# товар} few {# товари} many {# товарів} other {# товарів}}",
+    "empty": "Нічого не знайдено. Спробуйте змінити фільтри.",
+    "loadMore": "Завантажити ще",
+    "page": "Сторінка {n}",
+    "prev": "Попередня",
+    "next": "Наступна"
+  },
+  "Sort": {
+    "label": "Сортування",
+    "newest": "Спочатку нові",
+    "priceAsc": "Ціна: за зростанням",
+    "priceDesc": "Ціна: за спаданням",
+    "popular": "Популярні",
+    "rating": "За рейтингом"
+  },
+  "Filters": {
+    "title": "Фільтри",
+    "category": "Категорія",
+    "price": "Ціна",
+    "priceFrom": "Від",
+    "priceTo": "До",
+    "material": "Матеріал",
+    "region": "Регіон",
+    "inStock": "Тільки в наявності",
+    "apply": "Застосувати",
+    "reset": "Скинути",
+    "openMobile": "Фільтри",
+    "all": "Усі"
+  },
+  "ProductDetail": {
+    "description": "Опис",
+    "details": "Характеристики",
+    "shipping": "Доставка",
+    "reviews": "Відгуки",
+    "material": "Матеріал",
+    "region": "Регіон",
+    "artisan": "Майстер",
+    "weight": "Вага",
+    "dimensions": "Розміри",
+    "sku": "Артикул",
+    "category": "Категорія",
+    "quantity": "Кількість",
+    "related": "Схожі товари",
+    "stockLeft": "Залишилось {n} шт."
+  },
+  "Categories": {
+    "title": "Категорії",
+    "all": "Усі категорії",
+    "viewProducts": "Переглянути товари"
+  },
   "Footer": {
     "rights": "© {year} Рідне. Усі права захищені.",
     "madeIn": "Зроблено в Україні",

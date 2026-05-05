@@ -41,6 +41,58 @@
   "Currency": {
     "uah": "₴"
   },
+  "Catalog": {
+    "title": "Catalog",
+    "resultsCount": "{count, plural, =0 {No products found} one {# product} other {# products}}",
+    "empty": "Nothing matches these filters. Try adjusting them.",
+    "loadMore": "Load more",
+    "page": "Page {n}",
+    "prev": "Previous",
+    "next": "Next"
+  },
+  "Sort": {
+    "label": "Sort",
+    "newest": "Newest first",
+    "priceAsc": "Price: low to high",
+    "priceDesc": "Price: high to low",
+    "popular": "Most popular",
+    "rating": "Top rated"
+  },
+  "Filters": {
+    "title": "Filters",
+    "category": "Category",
+    "price": "Price",
+    "priceFrom": "From",
+    "priceTo": "To",
+    "material": "Material",
+    "region": "Region",
+    "inStock": "In stock only",
+    "apply": "Apply",
+    "reset": "Reset",
+    "openMobile": "Filters",
+    "all": "All"
+  },
+  "ProductDetail": {
+    "description": "Description",
+    "details": "Details",
+    "shipping": "Shipping",
+    "reviews": "Reviews",
+    "material": "Material",
+    "region": "Region",
+    "artisan": "Artisan",
+    "weight": "Weight",
+    "dimensions": "Dimensions",
+    "sku": "SKU",
+    "category": "Category",
+    "quantity": "Quantity",
+    "related": "Related products",
+    "stockLeft": "{n} left in stock"
+  },
+  "Categories": {
+    "title": "Categories",
+    "all": "All categories",
+    "viewProducts": "View products"
+  },
   "Footer": {
     "rights": "© {year} Рідне. All rights reserved.",
     "madeIn": "Made in Ukraine",
