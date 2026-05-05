@@ -93,6 +93,101 @@
     "all": "All categories",
     "viewProducts": "View products"
   },
+  "Checkout": {
+    "title": "Checkout",
+    "contactSection": "Contact information",
+    "shippingSection": "Shipping",
+    "paymentSection": "Payment",
+    "summarySection": "Order summary",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email",
+    "phone": "Phone",
+    "notes": "Order notes",
+    "shippingMethodNP": "Nova Poshta",
+    "shippingMethodUkrposhta": "Ukrposhta",
+    "shippingMethodPickup": "Self-pickup",
+    "shippingMethodIntl": "International",
+    "npCity": "City",
+    "npCityPlaceholder": "Start typing in Ukrainian...",
+    "npWarehouse": "Warehouse",
+    "npWarehousePlaceholder": "Select a warehouse",
+    "intlCountry": "Country",
+    "intlAddress": "Address",
+    "paymentLiqpay": "LiqPay (card)",
+    "paymentMonobank": "Monobank",
+    "paymentCOD": "Cash on delivery",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "total": "Total",
+    "place": "Place order",
+    "placing": "Processing...",
+    "emptyCart": "Your cart is empty.",
+    "successTitle": "Thank you!",
+    "successMessage": "Your order #{orderNumber} has been created. We'll contact you shortly.",
+    "successCta": "Continue shopping",
+    "errors": {
+      "INVALID_BODY": "Please check the form fields.",
+      "EMPTY_CART": "Your cart is empty.",
+      "PRODUCT_UNAVAILABLE": "Some items are no longer available. Please return to cart.",
+      "STOCK_INSUFFICIENT": "Insufficient stock. Reduce the quantity.",
+      "GENERIC": "Could not place the order. Please try again."
+    }
+  },
+  "Pages": {
+    "about": {
+      "title": "About us",
+      "intro": "Рідне (Ridne) is a family-run shop of handmade Ukrainian souvenirs at the heart of the country. We work with artisans from every region — from Carpathian ceramics to Petrykivka painting.",
+      "missionTitle": "Our mission",
+      "mission": "To preserve the living heritage of Ukrainian craft and bring it to people around the world. Every piece in our shop is the original work of a single artisan — never mass-produced.",
+      "valuesTitle": "Values",
+      "values": [
+        "Fair terms for artisans — honest pricing, no middlemen",
+        "Natural materials — clay, linen, wool, wood",
+        "Cultural context — every product's story is documented"
+      ]
+    },
+    "contact": {
+      "title": "Contact",
+      "intro": "Questions, wholesale orders, or partnership? Write to us.",
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "send": "Send",
+      "sent": "Thank you! We'll get back to you shortly.",
+      "address": "Address",
+      "addressValue": "Lviv, Rynok Square 1, Ukraine",
+      "phoneLabel": "Phone",
+      "phoneValue": "+38 (066) 000 00 00",
+      "emailLabel": "Email",
+      "emailValue": "hello@ridne.shop"
+    },
+    "shipping": {
+      "title": "Shipping & returns",
+      "deliveryTitle": "Delivery options",
+      "delivery": [
+        "Nova Poshta — branch or parcel locker, within Ukraine (1–3 business days)",
+        "Ukrposhta — to address, within Ukraine (3–7 days)",
+        "Self-pickup — at our Lviv shop",
+        "International — Europe & USA (7–21 days depending on the country)"
+      ],
+      "paymentTitle": "Payment",
+      "payment": [
+        "Card online (LiqPay, Monobank)",
+        "Cash on delivery at pickup (Nova Poshta)",
+        "Wire transfer for legal entities"
+      ],
+      "returnsTitle": "Returns",
+      "returns": "If your order arrives damaged — take a photo at the moment of receipt and contact us within 48 hours. We'll refund or replace it."
+    }
+  },
+  "Search": {
+    "title": "Search",
+    "placeholder": "What are you looking for?",
+    "empty": "Nothing found for \"{q}\".",
+    "tooShort": "Enter at least 2 characters",
+    "resultsFor": "Results for \"{q}\""
+  },
   "Cart": {
     "title": "Cart",
     "empty": "Your cart is empty.",
