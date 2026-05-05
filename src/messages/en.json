@@ -93,6 +93,21 @@
     "all": "All categories",
     "viewProducts": "View products"
   },
+  "Cart": {
+    "title": "Cart",
+    "empty": "Your cart is empty.",
+    "continueShopping": "Continue shopping",
+    "checkout": "Proceed to checkout",
+    "remove": "Remove",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "shippingNote": "Calculated at checkout",
+    "total": "Total",
+    "added": "Added to cart",
+    "stockExceeded": "Only {n} left in stock — quantity adjusted.",
+    "outOfStock": "Item is sold out and removed from cart.",
+    "priceChanged": "Prices updated for some items."
+  },
   "Footer": {
     "rights": "© {year} Рідне. All rights reserved.",
     "madeIn": "Made in Ukraine",

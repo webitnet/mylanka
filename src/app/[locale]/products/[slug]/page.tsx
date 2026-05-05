@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/Badge";
 import { Price } from "@/components/ui/Price";
 import { ProductCard } from "@/components/products/ProductCard";
 import { ProductGallery } from "@/components/products/ProductGallery";
-import { AddToCartStub } from "@/components/products/AddToCartStub";
+import { AddToCart } from "@/components/cart/AddToCart";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { prisma } from "@/lib/prisma";
@@ -190,7 +190,17 @@ export default async function ProductDetailPage({
             </p>
           )}
 
-          <AddToCartStub stock={product.stock} />
+          <AddToCart
+            product={{
+              slug: product.slug,
+              nameUk: product.nameUk,
+              nameEn: product.nameEn,
+              priceUah: product.priceUah,
+              imageUrl: product.images[0]?.url,
+            }}
+            stock={product.stock}
+            className="mt-7"
+          />
 
           <dl className="mt-10 grid grid-cols-2 gap-y-3 border-t border-border pt-6 text-sm">
             <dt className="font-[family-name:var(--font-ui)] text-[10px] uppercase tracking-wider text-muted">{t("sku")}</dt>
