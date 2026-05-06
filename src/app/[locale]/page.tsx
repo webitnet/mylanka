@@ -10,6 +10,8 @@ import {
   ProductCard,
   type ProductCardData,
 } from "@/components/products/ProductCard";
+import { Diamond } from "@/components/ornaments/Diamond";
+import { CrossStitchDivider } from "@/components/ornaments/CrossStitchDivider";
 
 async function getFeaturedProducts(): Promise<ProductCardData[]> {
   const rows = await prisma.product.findMany({
@@ -80,13 +82,20 @@ export default async function Home({
     <>
       <section className="border-b border-border bg-linen/50">
         <Container className="py-20 md:py-28 text-center">
-          <p className="font-[family-name:var(--font-ui)] text-xs uppercase tracking-[0.3em] text-muted">
-            {tBrand("tagline")}
+          <p className="flex items-center justify-center gap-3 font-[family-name:var(--font-ui)] text-xs uppercase tracking-[0.3em] text-bark">
+            <span>{tBrand("tagline")}</span>
+            <Diamond />
+            <span>{tBrand("tagline2")}</span>
+            <Diamond />
+            <span>{tBrand("tagline3")}</span>
           </p>
-          <h1 className="mt-5 font-[family-name:var(--font-display)] text-4xl text-bark sm:text-5xl md:text-6xl">
-            {t("heroTitle")}
+          <h1 className="mt-6 font-[family-name:var(--font-display)] text-5xl italic text-bark sm:text-6xl md:text-7xl">
+            {tBrand("name")}
           </h1>
-          <p className="mx-auto mt-5 max-w-xl text-base text-ink/75">
+          <p className="mt-3 font-[family-name:var(--font-display)] text-lg italic text-muted">
+            {tBrand("subTagline")}
+          </p>
+          <p className="mx-auto mt-6 max-w-xl text-base text-ink/75">
             {t("heroSubtitle")}
           </p>
           <div className="mt-9 flex items-center justify-center gap-3">
@@ -99,6 +108,7 @@ export default async function Home({
               </Button>
             </Link>
           </div>
+          <CrossStitchDivider className="mx-auto mt-12 max-w-md" />
         </Container>
       </section>
 

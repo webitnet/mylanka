@@ -47,7 +47,7 @@ export const useCartStore = create<CartState>()(
       clear: () => set({ items: [] }),
     }),
     {
-      name: "ridne-cart",
+      name: "mylanka-cart",
       storage: createJSONStorage(() => localStorage),
       version: 1,
     },

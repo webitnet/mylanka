@@ -21,5 +21,5 @@ export async function generateOrderNumber(now: Date = new Date()): Promise<strin
     where: { createdAt: { gte: start, lt: end } },
   });
   const seq = String(todayCount + 1).padStart(3, "0");
-  return `RDN-${datePart}-${seq}`;
+  return `MLN-${datePart}-${seq}`;
 }

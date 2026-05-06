@@ -12,7 +12,7 @@ export function Header() {
     <header className="sticky top-0 z-40 bg-bark text-parchment">
       <Container className="flex h-16 items-center justify-between gap-6">
         <Link href="/" className="flex items-baseline gap-2">
-          <span className="font-[family-name:var(--font-display)] text-2xl text-brass">
+          <span className="font-[family-name:var(--font-display)] text-3xl italic text-brass">
             {tBrand("name")}
           </span>
         </Link>
