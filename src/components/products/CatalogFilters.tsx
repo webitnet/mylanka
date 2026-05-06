@@ -47,7 +47,7 @@ export function CatalogFilters({
         {(selectedCategory || selectedMaterials.length || selectedRegions.length || inStock || minPrice || maxPrice) && (
           <Link
             href={basePath}
-            className="text-xs text-muted hover:text-terracotta transition"
+            className="text-xs text-muted hover:text-embroidery transition"
           >
             {t("reset")}
           </Link>
@@ -60,7 +60,7 @@ export function CatalogFilters({
             <li>
               <Link
                 href={buildHref(basePath, usp, { category: null, page: null })}
-                className={selectedCategory === "" ? "text-terracotta" : "text-bark hover:text-terracotta transition"}
+                className={selectedCategory === "" ? "text-embroidery" : "text-bark hover:text-embroidery transition"}
               >
                 {t("all")}
               </Link>
@@ -69,7 +69,7 @@ export function CatalogFilters({
               <li key={c.id}>
                 <Link
                   href={buildHref(basePath, usp, { category: c.slug, page: null })}
-                  className={selectedCategory === c.slug ? "text-terracotta" : "text-bark hover:text-terracotta transition"}
+                  className={selectedCategory === c.slug ? "text-embroidery" : "text-bark hover:text-embroidery transition"}
                 >
                   {locale === "uk" ? c.nameUk : c.nameEn}
                 </Link>
@@ -79,7 +79,7 @@ export function CatalogFilters({
                       <li key={sc.id}>
                         <Link
                           href={buildHref(basePath, usp, { category: sc.slug, page: null })}
-                          className={selectedCategory === sc.slug ? "text-terracotta" : "text-muted hover:text-terracotta transition"}
+                          className={selectedCategory === sc.slug ? "text-embroidery" : "text-muted hover:text-embroidery transition"}
                         >
                           {locale === "uk" ? sc.nameUk : sc.nameEn}
                         </Link>
@@ -107,7 +107,7 @@ export function CatalogFilters({
             name="minPrice"
             defaultValue={minPrice}
             placeholder={t("priceFrom")}
-            className="w-20 rounded-sm border border-border bg-cream px-2 py-1 text-sm focus:border-terracotta focus:outline-none"
+            className="w-20 rounded-sm border border-border bg-parchment px-2 py-1 text-sm focus:border-embroidery focus:outline-none"
           />
           <span className="text-muted">—</span>
           <input
@@ -116,11 +116,11 @@ export function CatalogFilters({
             name="maxPrice"
             defaultValue={maxPrice}
             placeholder={t("priceTo")}
-            className="w-20 rounded-sm border border-border bg-cream px-2 py-1 text-sm focus:border-terracotta focus:outline-none"
+            className="w-20 rounded-sm border border-border bg-parchment px-2 py-1 text-sm focus:border-embroidery focus:outline-none"
           />
           <button
             type="submit"
-            className="rounded-sm bg-bark px-2 py-1 font-[family-name:var(--font-ui)] text-[10px] uppercase tracking-wider text-cream hover:bg-terracotta transition"
+            className="rounded-sm bg-bark px-2 py-1 font-[family-name:var(--font-ui)] text-[10px] uppercase tracking-wider text-parchment hover:bg-embroidery transition"
           >
             {t("apply")}
           </button>
@@ -139,9 +139,9 @@ export function CatalogFilters({
                 <li key={m}>
                   <Link
                     href={buildHref(basePath, usp, { material: next.length ? next : null, page: null })}
-                    className="flex items-center gap-2 text-bark hover:text-terracotta transition"
+                    className="flex items-center gap-2 text-bark hover:text-embroidery transition"
                   >
-                    <span className={`h-4 w-4 rounded-sm border ${checked ? "bg-terracotta border-terracotta" : "bg-cream border-border"}`} />
+                    <span className={`h-4 w-4 rounded-sm border ${checked ? "bg-embroidery border-embroidery" : "bg-parchment border-border"}`} />
                     {m}
                   </Link>
                 </li>
@@ -163,9 +163,9 @@ export function CatalogFilters({
                 <li key={r}>
                   <Link
                     href={buildHref(basePath, usp, { region: next.length ? next : null, page: null })}
-                    className="flex items-center gap-2 text-bark hover:text-terracotta transition"
+                    className="flex items-center gap-2 text-bark hover:text-embroidery transition"
                   >
-                    <span className={`h-4 w-4 rounded-sm border ${checked ? "bg-terracotta border-terracotta" : "bg-cream border-border"}`} />
+                    <span className={`h-4 w-4 rounded-sm border ${checked ? "bg-embroidery border-embroidery" : "bg-parchment border-border"}`} />
                     {r}
                   </Link>
                 </li>
@@ -178,9 +178,9 @@ export function CatalogFilters({
       <FilterGroup label="">
         <Link
           href={buildHref(basePath, usp, { inStock: inStock ? null : "1", page: null })}
-          className="flex items-center gap-2 text-sm text-bark hover:text-terracotta transition"
+          className="flex items-center gap-2 text-sm text-bark hover:text-embroidery transition"
         >
-          <span className={`h-4 w-4 rounded-sm border ${inStock ? "bg-terracotta border-terracotta" : "bg-cream border-border"}`} />
+          <span className={`h-4 w-4 rounded-sm border ${inStock ? "bg-embroidery border-embroidery" : "bg-parchment border-border"}`} />
           {t("inStock")}
         </Link>
       </FilterGroup>

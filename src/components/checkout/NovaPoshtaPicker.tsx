@@ -135,18 +135,18 @@ export function NovaPoshtaPicker({
           }}
           onFocus={() => setShowCityList(true)}
           placeholder={t("npCityPlaceholder")}
-          className="mt-1 w-full rounded-sm border border-border bg-cream px-3 py-2 text-sm focus:border-terracotta focus:outline-none"
+          className="mt-1 w-full rounded-sm border border-border bg-parchment px-3 py-2 text-sm focus:border-embroidery focus:outline-none"
           autoComplete="off"
         />
         {showCityList && cities.length > 0 && (
-          <ul className="absolute z-20 mt-1 max-h-72 w-full overflow-y-auto rounded-sm border border-border bg-cream shadow-md">
+          <ul className="absolute z-20 mt-1 max-h-72 w-full overflow-y-auto rounded-sm border border-border bg-parchment shadow-md">
             {cities.map((c) => (
               <li key={c.ref}>
                 <button
                   type="button"
                   onClick={() => selectCity(c)}
                   className={cn(
-                    "block w-full px-3 py-2 text-left text-sm hover:bg-wheat",
+                    "block w-full px-3 py-2 text-left text-sm hover:bg-linen",
                     c.warehouses === 0 && "text-muted",
                   )}
                 >
@@ -174,7 +174,7 @@ export function NovaPoshtaPicker({
           <select
             value={warehouseRef}
             onChange={(e) => setWarehouseRef(e.target.value)}
-            className="mt-1 w-full rounded-sm border border-border bg-cream px-3 py-2 text-sm focus:border-terracotta focus:outline-none"
+            className="mt-1 w-full rounded-sm border border-border bg-parchment px-3 py-2 text-sm focus:border-embroidery focus:outline-none"
           >
             <option value="">{t("npWarehousePlaceholder")}</option>
             {warehouses.map((w) => (

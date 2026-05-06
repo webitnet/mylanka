@@ -8,10 +8,10 @@ const base =
   "inline-flex items-center justify-center rounded-sm font-[family-name:var(--font-ui)] uppercase tracking-wider transition disabled:opacity-50 disabled:pointer-events-none";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-terracotta text-cream hover:opacity-90",
+  primary: "bg-embroidery text-parchment hover:opacity-90",
   secondary:
-    "border border-bark text-bark bg-transparent hover:bg-bark hover:text-cream",
-  ghost: "text-bark hover:text-terracotta",
+    "border border-bark text-bark bg-transparent hover:bg-bark hover:text-parchment",
+  ghost: "text-bark hover:text-embroidery",
 };
 
 const sizes: Record<Size, string> = {

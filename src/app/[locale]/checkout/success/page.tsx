@@ -23,7 +23,7 @@ export default async function CheckoutSuccessPage({
 
   return (
     <Container className="py-24 text-center">
-      <p className="font-[family-name:var(--font-ui)] text-[10px] uppercase tracking-[0.3em] text-gold">
+      <p className="font-[family-name:var(--font-ui)] text-[10px] uppercase tracking-[0.3em] text-brass">
         ✓
       </p>
       <h1 className="mt-3 font-[family-name:var(--font-display)] text-3xl text-bark md:text-4xl">

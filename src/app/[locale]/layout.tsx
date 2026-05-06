@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Unbounded, Martel } from "next/font/google";
+import { Cormorant_Garamond, Cormorant_SC, Lora } from "next/font/google";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
@@ -8,29 +8,33 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import "../globals.css";
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
   subsets: ["latin", "cyrillic"],
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
-const unbounded = Unbounded({
-  variable: "--font-unbounded",
+const cormorantSc = Cormorant_SC({
+  variable: "--font-cormorant-sc",
   subsets: ["latin", "cyrillic"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
-const martel = Martel({
-  variable: "--font-martel",
-  subsets: ["latin"],
-  weight: ["300", "400", "600", "700"],
+const lora = Lora({
+  variable: "--font-lora",
+  subsets: ["latin", "cyrillic"],
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Рідне — Handmade Ukrainian Souvenirs",
+  title: "Миланка — Handmade Ukrainian Souvenirs",
   description:
-    "Handmade Ukrainian souvenirs: ceramics, textiles, woodwork, jewelry, and regional gifts.",
+    "Миланка — Вишиванки, сувеніри, обереги. Традиції, що живуть у серці.",
 };
 
 export function generateStaticParams() {
@@ -51,9 +55,9 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      className={`${playfair.variable} ${unbounded.variable} ${martel.variable} h-full antialiased`}
+      className={`${cormorant.variable} ${cormorantSc.variable} ${lora.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-cream text-ink">
+      <body className="min-h-full flex flex-col bg-parchment text-ink">
         <NextIntlClientProvider>
           <Header />
           <main className="flex-1">{children}</main>

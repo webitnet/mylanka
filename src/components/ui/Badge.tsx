@@ -3,10 +3,10 @@ import { cn } from "@/lib/utils";
 type Variant = "default" | "new" | "sale" | "featured";
 
 const variants: Record<Variant, string> = {
-  default: "bg-wheat text-bark",
-  new: "bg-sage text-cream",
-  sale: "bg-terracotta text-cream",
-  featured: "bg-gold text-bark",
+  default: "bg-linen text-bark",
+  new: "bg-olive text-parchment",
+  sale: "bg-embroidery text-parchment",
+  featured: "bg-brass text-bark",
 };
 
 export function Badge({

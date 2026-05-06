@@ -30,7 +30,7 @@ export function ProductCard({
 
   return (
     <Link href={`/products/${product.slug}`} className="group block">
-      <div className="relative aspect-[4/5] overflow-hidden rounded-sm bg-wheat">
+      <div className="relative aspect-[4/5] overflow-hidden rounded-sm bg-linen">
         {product.imageUrl ? (
           <Image
             src={product.imageUrl}
@@ -58,7 +58,7 @@ export function ProductCard({
         )}
       </div>
       <div className="mt-3 space-y-1">
-        <h3 className="line-clamp-2 text-sm text-bark group-hover:text-terracotta transition">
+        <h3 className="line-clamp-2 text-sm text-bark group-hover:text-embroidery transition">
           {name}
         </h3>
         <Price amount={product.priceUah} comparePrice={product.comparePrice} />

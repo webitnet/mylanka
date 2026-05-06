@@ -10,13 +10,13 @@ export function ProductGallery({ images }: { images: GalleryImage[] }) {
   const [active, setActive] = useState(0);
   if (images.length === 0) {
     return (
-      <div className="aspect-[4/5] w-full rounded-sm bg-wheat" aria-hidden />
+      <div className="aspect-[4/5] w-full rounded-sm bg-linen" aria-hidden />
     );
   }
   const main = images[active];
   return (
     <div>
-      <div className="relative aspect-[4/5] overflow-hidden rounded-sm bg-wheat">
+      <div className="relative aspect-[4/5] overflow-hidden rounded-sm bg-linen">
         <Image
           src={main.url}
           alt={main.alt}
@@ -34,8 +34,8 @@ export function ProductGallery({ images }: { images: GalleryImage[] }) {
               type="button"
               onClick={() => setActive(i)}
               className={cn(
-                "relative aspect-square overflow-hidden rounded-sm border bg-wheat",
-                i === active ? "border-terracotta" : "border-border hover:border-bark transition",
+                "relative aspect-square overflow-hidden rounded-sm border bg-linen",
+                i === active ? "border-embroidery" : "border-border hover:border-bark transition",
               )}
             >
               <Image src={img.url} alt={img.alt} fill sizes="100px" className="object-cover" />

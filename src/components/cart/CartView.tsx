@@ -102,7 +102,7 @@ export function CartView() {
     <div className="grid gap-10 lg:grid-cols-[1fr_22rem]">
       <div className="min-w-0">
         {notice && (
-          <div className="mb-4 rounded-sm border border-terracotta/40 bg-terracotta/10 px-4 py-3 text-sm text-bark">
+          <div className="mb-4 rounded-sm border border-embroidery/40 bg-embroidery/10 px-4 py-3 text-sm text-bark">
             {notice}
           </div>
         )}
@@ -120,7 +120,7 @@ export function CartView() {
         </ul>
       </div>
 
-      <aside className="h-fit rounded-sm border border-border bg-cream/60 p-6">
+      <aside className="h-fit rounded-sm border border-border bg-parchment/60 p-6">
         <Row label={t("subtotal")} value={formatUah(subtotal, locale)} />
         <Row label={t("shipping")} value={t("shippingNote")} muted />
         <div className="mt-3 border-t border-border pt-3">
@@ -159,7 +159,7 @@ function CartRow({
   const max = stock ?? 99;
   return (
     <li className="flex gap-4 py-4">
-      <div className="relative aspect-[4/5] w-20 shrink-0 overflow-hidden rounded-sm bg-wheat">
+      <div className="relative aspect-[4/5] w-20 shrink-0 overflow-hidden rounded-sm bg-linen">
         {item.imageUrl && (
           <Image src={item.imageUrl} alt={name} fill sizes="80px" className="object-cover" />
         )}
@@ -168,14 +168,14 @@ function CartRow({
         <div className="flex items-start justify-between gap-3">
           <Link
             href={`/products/${item.slug}`}
-            className="text-sm text-bark hover:text-terracotta transition"
+            className="text-sm text-bark hover:text-embroidery transition"
           >
             {name}
           </Link>
           <button
             type="button"
             onClick={onRemove}
-            className="text-xs text-muted hover:text-terracotta transition"
+            className="text-xs text-muted hover:text-embroidery transition"
             aria-label={t("remove")}
           >
             {t("remove")}

@@ -245,7 +245,7 @@ export function CheckoutForm() {
       </div>
 
       {/* Summary */}
-      <aside className="h-fit rounded-sm border border-border bg-cream/60 p-6">
+      <aside className="h-fit rounded-sm border border-border bg-parchment/60 p-6">
         <h2 className="font-[family-name:var(--font-ui)] text-[10px] uppercase tracking-[0.2em] text-muted">
           {t("summarySection")}
         </h2>
@@ -269,7 +269,7 @@ export function CheckoutForm() {
           </div>
         </div>
         {error && (
-          <p className="mt-4 rounded-sm border border-terracotta/40 bg-terracotta/10 px-3 py-2 text-xs text-bark">
+          <p className="mt-4 rounded-sm border border-embroidery/40 bg-embroidery/10 px-3 py-2 text-xs text-bark">
             {error}
           </p>
         )}
@@ -317,12 +317,12 @@ function RadioCard({
       type="button"
       onClick={onClick}
       className={`flex items-center gap-3 rounded-sm border px-4 py-3 text-left text-sm transition ${
-        checked ? "border-terracotta bg-wheat/40 text-bark" : "border-border text-bark hover:border-bark"
+        checked ? "border-embroidery bg-linen/40 text-bark" : "border-border text-bark hover:border-bark"
       }`}
     >
       <span
         className={`h-4 w-4 rounded-full border-2 ${
-          checked ? "border-terracotta bg-terracotta" : "border-border bg-cream"
+          checked ? "border-embroidery bg-embroidery" : "border-border bg-parchment"
         }`}
       />
       {label}

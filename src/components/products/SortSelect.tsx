@@ -41,7 +41,7 @@ export function SortSelect({
         value={current}
         onChange={onChange}
         disabled={isPending}
-        className="rounded-sm border border-border bg-cream px-2 py-1.5 text-sm text-bark focus:border-terracotta focus:outline-none"
+        className="rounded-sm border border-border bg-parchment px-2 py-1.5 text-sm text-bark focus:border-embroidery focus:outline-none"
       >
         {SORT_KEYS.map((k) => (
           <option key={k} value={k}>

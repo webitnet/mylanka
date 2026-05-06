@@ -78,7 +78,7 @@ export default async function Home({
 
   return (
     <>
-      <section className="border-b border-border bg-wheat/50">
+      <section className="border-b border-border bg-linen/50">
         <Container className="py-20 md:py-28 text-center">
           <p className="font-[family-name:var(--font-ui)] text-xs uppercase tracking-[0.3em] text-muted">
             {tBrand("tagline")}
@@ -116,7 +116,7 @@ export default async function Home({
               </div>
               <Link
                 href="/products"
-                className="hidden sm:inline font-[family-name:var(--font-ui)] text-xs uppercase tracking-wider text-muted hover:text-terracotta transition"
+                className="hidden sm:inline font-[family-name:var(--font-ui)] text-xs uppercase tracking-wider text-muted hover:text-embroidery transition"
               >
                 {t("viewAll")}
               </Link>
@@ -135,7 +135,7 @@ export default async function Home({
       )}
 
       {categories.length > 0 && (
-        <section className="border-y border-border bg-cream/50 py-16 md:py-20">
+        <section className="border-y border-border bg-parchment/50 py-16 md:py-20">
           <Container>
             <h2 className="font-[family-name:var(--font-display)] text-3xl text-bark md:text-4xl">
               {t("categoriesTitle")}
@@ -145,7 +145,7 @@ export default async function Home({
                 <Link
                   key={c.id}
                   href={`/categories/${c.slug}`}
-                  className="group flex aspect-[3/2] items-end overflow-hidden rounded-sm bg-bark/90 p-4 text-cream transition hover:bg-terracotta"
+                  className="group flex aspect-[3/2] items-end overflow-hidden rounded-sm bg-bark/90 p-4 text-parchment transition hover:bg-embroidery"
                 >
                   <span className="font-[family-name:var(--font-display)] text-xl">
                     {locale === "uk" ? c.nameUk : c.nameEn}

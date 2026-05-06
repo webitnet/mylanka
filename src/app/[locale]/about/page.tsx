@@ -38,7 +38,7 @@ export default async function AboutPage({
         <ul className="mt-4 space-y-2 text-base text-ink/80">
           {values.map((v, i) => (
             <li key={i} className="flex gap-3">
-              <span className="mt-2 h-1 w-3 shrink-0 rounded-full bg-terracotta" />
+              <span className="mt-2 h-1 w-3 shrink-0 rounded-full bg-embroidery" />
               {v}
             </li>
           ))}

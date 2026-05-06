@@ -14,7 +14,7 @@ export function HeaderCartLink() {
   return (
     <Link
       href="/cart"
-      className="relative font-[family-name:var(--font-ui)] text-xs uppercase tracking-wider hover:text-gold transition"
+      className="relative font-[family-name:var(--font-ui)] text-xs uppercase tracking-wider hover:text-brass transition"
       aria-label={t("cart")}
     >
       <svg
@@ -32,7 +32,7 @@ export function HeaderCartLink() {
         <path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6" />
       </svg>
       {count > 0 && (
-        <span className="absolute -right-2 -top-2 inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-terracotta px-1 text-[10px] font-medium text-cream">
+        <span className="absolute -right-2 -top-2 inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-embroidery px-1 text-[10px] font-medium text-parchment">
           {count}
         </span>
       )}

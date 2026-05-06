@@ -146,10 +146,10 @@ export default async function ProductDetailPage({
 
       <nav aria-label="Breadcrumb" className="mb-6 text-xs text-muted">
         <ol className="flex flex-wrap items-center gap-1.5">
-          <li><Link href="/products" className="hover:text-terracotta transition">{isUk ? "Каталог" : "Catalog"}</Link></li>
+          <li><Link href="/products" className="hover:text-embroidery transition">{isUk ? "Каталог" : "Catalog"}</Link></li>
           <li aria-hidden>›</li>
           <li>
-            <Link href={`/categories/${product.category.slug}`} className="hover:text-terracotta transition">
+            <Link href={`/categories/${product.category.slug}`} className="hover:text-embroidery transition">
               {categoryName}
             </Link>
           </li>
@@ -179,7 +179,7 @@ export default async function ProductDetailPage({
           </div>
 
           {!outOfStock && product.stock <= product.lowStockAt && (
-            <p className="mt-3 text-xs text-terracotta">
+            <p className="mt-3 text-xs text-embroidery">
               {t("stockLeft", { n: product.stock })}
             </p>
           )}
@@ -207,7 +207,7 @@ export default async function ProductDetailPage({
             <dd className="text-bark">{product.sku}</dd>
             <dt className="font-[family-name:var(--font-ui)] text-[10px] uppercase tracking-wider text-muted">{t("category")}</dt>
             <dd>
-              <Link href={`/categories/${product.category.slug}`} className="text-bark hover:text-terracotta transition">
+              <Link href={`/categories/${product.category.slug}`} className="text-bark hover:text-embroidery transition">
                 {categoryName}
               </Link>
             </dd>

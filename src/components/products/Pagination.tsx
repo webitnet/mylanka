@@ -33,7 +33,7 @@ export function Pagination({
         aria-disabled={page === 1}
         className={cn(
           "rounded-sm border border-border px-3 py-1.5 font-[family-name:var(--font-ui)] text-xs uppercase tracking-wider",
-          page === 1 ? "pointer-events-none text-muted" : "text-bark hover:bg-bark hover:text-cream transition",
+          page === 1 ? "pointer-events-none text-muted" : "text-bark hover:bg-bark hover:text-parchment transition",
         )}
       >
         {t("prev")}
@@ -48,7 +48,7 @@ export function Pagination({
             className={cn(
               "rounded-sm border px-3 py-1.5 font-[family-name:var(--font-ui)] text-xs",
               p === page
-                ? "border-bark bg-bark text-cream"
+                ? "border-bark bg-bark text-parchment"
                 : "border-border text-bark hover:border-bark transition",
             )}
           >
@@ -61,7 +61,7 @@ export function Pagination({
         aria-disabled={page === totalPages}
         className={cn(
           "rounded-sm border border-border px-3 py-1.5 font-[family-name:var(--font-ui)] text-xs uppercase tracking-wider",
-          page === totalPages ? "pointer-events-none text-muted" : "text-bark hover:bg-bark hover:text-cream transition",
+          page === totalPages ? "pointer-events-none text-muted" : "text-bark hover:bg-bark hover:text-parchment transition",
         )}
       >
         {t("next")}

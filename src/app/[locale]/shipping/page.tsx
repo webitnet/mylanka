@@ -26,7 +26,7 @@ export default async function ShippingPage({
         <Section title={t("deliveryTitle")}>
           {delivery.map((d, i) => (
             <li key={i} className="flex gap-3">
-              <span className="mt-2 h-1 w-3 shrink-0 rounded-full bg-terracotta" />
+              <span className="mt-2 h-1 w-3 shrink-0 rounded-full bg-embroidery" />
               {d}
             </li>
           ))}
@@ -35,7 +35,7 @@ export default async function ShippingPage({
         <Section title={t("paymentTitle")}>
           {payment.map((d, i) => (
             <li key={i} className="flex gap-3">
-              <span className="mt-2 h-1 w-3 shrink-0 rounded-full bg-terracotta" />
+              <span className="mt-2 h-1 w-3 shrink-0 rounded-full bg-embroidery" />
               {d}
             </li>
           ))}

@@ -9,25 +9,25 @@ export function Header() {
   const tBrand = useTranslations("Brand");
 
   return (
-    <header className="sticky top-0 z-40 bg-bark text-cream">
+    <header className="sticky top-0 z-40 bg-bark text-parchment">
       <Container className="flex h-16 items-center justify-between gap-6">
         <Link href="/" className="flex items-baseline gap-2">
-          <span className="font-[family-name:var(--font-display)] text-2xl text-gold">
+          <span className="font-[family-name:var(--font-display)] text-2xl text-brass">
             {tBrand("name")}
           </span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-7 font-[family-name:var(--font-ui)] text-xs uppercase tracking-wider">
-          <Link href="/products" className="hover:text-gold transition">
+          <Link href="/products" className="hover:text-brass transition">
             {tNav("catalog")}
           </Link>
-          <Link href="/categories" className="hover:text-gold transition">
+          <Link href="/categories" className="hover:text-brass transition">
             {tNav("categories")}
           </Link>
-          <Link href="/about" className="hover:text-gold transition">
+          <Link href="/about" className="hover:text-brass transition">
             {tNav("about")}
           </Link>
-          <Link href="/shipping" className="hover:text-gold transition">
+          <Link href="/shipping" className="hover:text-brass transition">
             {tNav("shipping")}
           </Link>
         </nav>
@@ -35,7 +35,7 @@ export function Header() {
         <div className="flex items-center gap-4">
           <Link
             href="/search"
-            className="font-[family-name:var(--font-ui)] text-xs uppercase tracking-wider hover:text-gold transition"
+            className="font-[family-name:var(--font-ui)] text-xs uppercase tracking-wider hover:text-brass transition"
             aria-label={tNav("search")}
           >
             <SearchIcon />

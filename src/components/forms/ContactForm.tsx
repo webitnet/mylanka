@@ -23,7 +23,7 @@ export function ContactForm() {
 
   if (sent) {
     return (
-      <p className="rounded-sm border border-sage/40 bg-sage/10 p-4 text-sm text-bark">
+      <p className="rounded-sm border border-olive/40 bg-olive/10 p-4 text-sm text-bark">
         {t("sent")}
       </p>
     );

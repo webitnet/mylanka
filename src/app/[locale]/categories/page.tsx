@@ -39,9 +39,9 @@ export default async function CategoriesIndex({
           <Link
             key={c.id}
             href={`/categories/${c.slug}`}
-            className="group block rounded-sm border border-border bg-cream/60 p-6 transition hover:border-terracotta hover:bg-wheat/40"
+            className="group block rounded-sm border border-border bg-parchment/60 p-6 transition hover:border-embroidery hover:bg-linen/40"
           >
-            <h2 className="font-[family-name:var(--font-display)] text-xl text-bark group-hover:text-terracotta">
+            <h2 className="font-[family-name:var(--font-display)] text-xl text-bark group-hover:text-embroidery">
               {isUk ? c.nameUk : c.nameEn}
             </h2>
             {c.children.length > 0 && (

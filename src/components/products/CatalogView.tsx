@@ -106,7 +106,7 @@ function CatalogToolbar({
 function EmptyState() {
   const t = useTranslations("Catalog");
   return (
-    <div className="mt-16 rounded-sm border border-dashed border-border bg-cream/60 p-10 text-center text-muted">
+    <div className="mt-16 rounded-sm border border-dashed border-border bg-parchment/60 p-10 text-center text-muted">
       {t("empty")}
     </div>
   );

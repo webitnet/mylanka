@@ -26,15 +26,15 @@ export function LocaleSwitcher() {
     >
       {routing.locales.map((loc, i) => (
         <span key={loc} className="flex items-center">
-          {i > 0 && <span className="px-1 text-cream/40">/</span>}
+          {i > 0 && <span className="px-1 text-parchment/40">/</span>}
           <button
             type="button"
             onClick={() => switchTo(loc)}
             disabled={isPending}
             className={
               loc === locale
-                ? "text-gold"
-                : "text-cream/70 hover:text-gold transition"
+                ? "text-brass"
+                : "text-parchment/70 hover:text-brass transition"
             }
             aria-current={loc === locale ? "true" : undefined}
           >

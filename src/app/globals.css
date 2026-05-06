@@ -1,51 +1,56 @@
 @import "tailwindcss";
 
-/* RIDNE — Design System tokens
+/* MYLANKA — Design tokens
  * Source of truth: docs/DESIGN-SYSTEM.md
  */
 
 :root {
-  /* Brand palette */
-  --color-bark: #3D2B1F;
-  --color-terracotta: #C8593A;
-  --color-gold: #D4A843;
-  --color-sage: #7A9E7E;
-  --color-wheat: #F2E4C4;
-  --color-cream: #FAF5EC;
-  --color-ink: #1E1510;
-  --color-muted: #8B7D6B;
-  --color-border: #E0D5C7;
+  /* Brand */
+  --color-bark:       #3A2A1C;
+  --color-embroidery: #A8252E;
+  --color-berry:      #C7373E;
+  --color-olive:      #7A622E;
+  --color-brass:      #A88B4F;
+
+  /* Surfaces */
+  --color-linen:      #F5EAD2;
+  --color-parchment:  #FBF5E5;
+
+  /* Neutrals */
+  --color-ink:        #1F1812;
+  --color-muted:      #8B7853;
+  --color-border:     #DCCDA8;
 
   /* Semantic */
-  --color-error: #C8593A;
-  --color-success: #7A9E7E;
-  --color-warning: #D4A843;
+  --color-error:      #A8252E;
+  --color-success:    #7A622E;
+  --color-warning:    #A88B4F;
 
-  /* Page defaults */
-  --background: var(--color-cream);
+  --background: var(--color-parchment);
   --foreground: var(--color-ink);
 }
 
 @theme inline {
-  /* Brand colors — exposed as Tailwind utilities (bg-bark, text-terracotta, border-border, etc.) */
-  --color-bark: var(--color-bark);
-  --color-terracotta: var(--color-terracotta);
-  --color-gold: var(--color-gold);
-  --color-sage: var(--color-sage);
-  --color-wheat: var(--color-wheat);
-  --color-cream: var(--color-cream);
-  --color-ink: var(--color-ink);
-  --color-muted: var(--color-muted);
-  --color-border: var(--color-border);
+  /* Brand colors — exposed as Tailwind utilities (bg-bark, text-embroidery, border-border, etc.) */
+  --color-bark:       var(--color-bark);
+  --color-embroidery: var(--color-embroidery);
+  --color-berry:      var(--color-berry);
+  --color-olive:      var(--color-olive);
+  --color-brass:      var(--color-brass);
+  --color-linen:      var(--color-linen);
+  --color-parchment:  var(--color-parchment);
+  --color-ink:        var(--color-ink);
+  --color-muted:      var(--color-muted);
+  --color-border:     var(--color-border);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  /* Type stack — wired through next/font in layout.tsx */
-  --font-display: var(--font-playfair), Georgia, serif;
-  --font-ui: var(--font-unbounded), system-ui, sans-serif;
-  --font-body: var(--font-martel), Georgia, serif;
-  --font-sans: var(--font-body);
+  /* Type stack — variables wired via next/font in layout.tsx */
+  --font-display: var(--font-cormorant), Georgia, serif;
+  --font-ui:      var(--font-cormorant-sc), Georgia, serif;
+  --font-body:    var(--font-lora), Georgia, serif;
+  --font-sans:    var(--font-body);
 }
 
 body {
@@ -59,11 +64,12 @@ body {
   width: 100%;
   border-radius: 2px;
   border: 1px solid var(--color-border);
-  background: var(--color-cream);
+  background: var(--color-parchment);
   padding: 0.5rem 0.75rem;
   font-size: 0.875rem;
+  font-family: var(--font-body);
 }
 .input:focus {
   outline: none;
-  border-color: var(--color-terracotta);
+  border-color: var(--color-embroidery);
 }

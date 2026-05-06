@@ -67,12 +67,12 @@ export default async function CategoryPage({
     <Container className="py-10 md:py-14">
       <nav aria-label="Breadcrumb" className="mb-4 text-xs text-muted">
         <ol className="flex flex-wrap items-center gap-1.5">
-          <li><Link href="/categories" className="hover:text-terracotta transition">{isUk ? "Категорії" : "Categories"}</Link></li>
+          <li><Link href="/categories" className="hover:text-embroidery transition">{isUk ? "Категорії" : "Categories"}</Link></li>
           {category.parent && (
             <>
               <li aria-hidden>›</li>
               <li>
-                <Link href={`/categories/${category.parent.slug}`} className="hover:text-terracotta transition">
+                <Link href={`/categories/${category.parent.slug}`} className="hover:text-embroidery transition">
                   {isUk ? category.parent.nameUk : category.parent.nameEn}
                 </Link>
               </li>
@@ -93,7 +93,7 @@ export default async function CategoryPage({
               <li key={sc.id}>
                 <Link
                   href={`/categories/${sc.slug}`}
-                  className="rounded-full border border-border bg-cream px-3 py-1 text-xs text-bark hover:border-bark transition"
+                  className="rounded-full border border-border bg-parchment px-3 py-1 text-xs text-bark hover:border-bark transition"
                 >
                   {isUk ? sc.nameUk : sc.nameEn}
                 </Link>
