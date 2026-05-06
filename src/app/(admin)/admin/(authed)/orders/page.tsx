@@ -67,16 +67,32 @@ export default async function OrdersListPage({
     page,
   });
 
+  const exportParams = new URLSearchParams();
+  if (q) exportParams.set("q", q);
+  if (status !== "all") exportParams.set("status", status);
+  if (paymentStatus !== "all") exportParams.set("payment", paymentStatus);
+  const exportHref = `/api/admin/orders/export${
+    exportParams.toString() ? `?${exportParams}` : ""
+  }`;
+
   return (
     <div className="space-y-6">
-      <header>
-        <p className="font-[family-name:var(--font-ui)] text-[10px] uppercase tracking-[0.3em] text-brass">
-          Замовлення
-        </p>
-        <h1 className="mt-2 font-[family-name:var(--font-display)] text-4xl italic text-bark">
-          Усі замовлення
-        </h1>
-        <p className="mt-1 text-sm text-muted">Всього: {total}</p>
+      <header className="flex items-end justify-between">
+        <div>
+          <p className="font-[family-name:var(--font-ui)] text-[10px] uppercase tracking-[0.3em] text-brass">
+            Замовлення
+          </p>
+          <h1 className="mt-2 font-[family-name:var(--font-display)] text-4xl italic text-bark">
+            Усі замовлення
+          </h1>
+          <p className="mt-1 text-sm text-muted">Всього: {total}</p>
+        </div>
+        <a
+          href={exportHref}
+          className="rounded-sm border border-bark px-4 py-2 font-[family-name:var(--font-ui)] text-xs uppercase tracking-wider text-bark hover:bg-bark hover:text-parchment"
+        >
+          Експорт CSV
+        </a>
       </header>
 
       <form

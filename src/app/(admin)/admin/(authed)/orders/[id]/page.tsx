@@ -6,6 +6,7 @@ import {
   getOrderForAdmin,
   markDelivered,
   markProcessing,
+  refundOrder,
   shipOrder,
   updateAdminNotes,
 } from "@/lib/admin/orders";
@@ -80,6 +81,10 @@ export default async function OrderDetailPage({
     "use server";
     await cancelOrder(id);
   };
+  const refundAction = async () => {
+    "use server";
+    await refundOrder(id);
+  };
   const shipAction = async (fd: FormData) => {
     "use server";
     const tracking = String(fd.get("trackingNumber") ?? "");
@@ -96,6 +101,8 @@ export default async function OrderDetailPage({
   const canProcess = order.status === "CONFIRMED";
   const canShip = order.status === "CONFIRMED" || order.status === "PROCESSING";
   const canDeliver = order.status === "SHIPPED";
+  const canRefund =
+    !isTerminal && order.paymentStatus === "PAID";
 
   return (
     <div className="space-y-8">
@@ -166,7 +173,20 @@ export default async function OrderDetailPage({
               label="Скасувати"
               variant="danger"
             />
+            {canRefund && (
+              <ActionButton
+                action={refundAction}
+                label="Оформити повернення"
+                variant="danger"
+              />
+            )}
           </div>
+          {canRefund && (
+            <p className="mt-3 text-xs text-muted">
+              Повернення коштів виконується вручну в кабінеті провайдера. Кнопка
+              лише фіксує статус і повертає товари на склад.
+            </p>
+          )}
         </section>
       )}
 

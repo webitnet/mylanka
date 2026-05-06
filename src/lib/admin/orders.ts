@@ -91,6 +91,56 @@ export async function getOrderForAdmin(id: string) {
   });
 }
 
+function buildOrdersWhere(
+  filter: Pick<OrdersListFilter, "q" | "status" | "paymentStatus">,
+): Prisma.OrderWhereInput {
+  const where: Prisma.OrderWhereInput = {};
+  if (filter.q?.trim()) {
+    const q = filter.q.trim();
+    where.OR = [
+      { orderNumber: { contains: q, mode: "insensitive" } },
+      { firstName: { contains: q, mode: "insensitive" } },
+      { lastName: { contains: q, mode: "insensitive" } },
+      { email: { contains: q, mode: "insensitive" } },
+      { phone: { contains: q, mode: "insensitive" } },
+    ];
+  }
+  if (filter.status && filter.status !== "all") where.status = filter.status;
+  if (filter.paymentStatus && filter.paymentStatus !== "all")
+    where.paymentStatus = filter.paymentStatus;
+  return where;
+}
+
+export async function listOrdersForExport(
+  filter: Pick<OrdersListFilter, "q" | "status" | "paymentStatus">,
+) {
+  return prisma.order.findMany({
+    where: buildOrdersWhere(filter),
+    orderBy: { createdAt: "desc" },
+    select: {
+      orderNumber: true,
+      createdAt: true,
+      status: true,
+      paymentStatus: true,
+      source: true,
+      firstName: true,
+      lastName: true,
+      email: true,
+      phone: true,
+      shippingMethod: true,
+      npCity: true,
+      npWarehouse: true,
+      shippingAddress: true,
+      trackingNumber: true,
+      subtotal: true,
+      shippingCost: true,
+      discount: true,
+      total: true,
+      _count: { select: { items: true } },
+    },
+  });
+}
+
 // ─── Status transitions ───────────────────────────────────────────
 
 const TERMINAL: OrderStatus[] = ["CANCELLED", "REFUNDED"];
@@ -194,6 +244,56 @@ export async function cancelOrder(id: string) {
     await tx.order.update({
       where: { id },
       data: { status: "CANCELLED" },
+    });
+  });
+  revalidatePath("/admin/orders");
+  revalidatePath(`/admin/orders/${id}`);
+}
+
+/**
+ * Manual refund: assumes the operator has already issued the refund in the
+ * payment provider's dashboard. We mark the order/payments as REFUNDED and
+ * restore stock for tracked items. No upstream API call is made.
+ */
+export async function refundOrder(id: string) {
+  await prisma.$transaction(async (tx) => {
+    const order = await tx.order.findUnique({
+      where: { id },
+      select: {
+        status: true,
+        paymentStatus: true,
+        items: {
+          select: {
+            productId: true,
+            quantity: true,
+            product: { select: { trackStock: true } },
+          },
+        },
+      },
+    });
+    if (!order) throw new Error("Order not found");
+    if (order.status === "REFUNDED") throw new Error("Замовлення вже повернуто");
+    if (order.paymentStatus !== "PAID") {
+      throw new Error("Повернути можна лише оплачене замовлення");
+    }
+
+    for (const item of order.items) {
+      if (item.product.trackStock) {
+        await tx.product.update({
+          where: { id: item.productId },
+          data: { stock: { increment: item.quantity } },
+        });
+      }
+    }
+
+    await tx.payment.updateMany({
+      where: { orderId: id, status: "PAID" },
+      data: { status: "REFUNDED" },
+    });
+
+    await tx.order.update({
+      where: { id },
+      data: { status: "REFUNDED", paymentStatus: "REFUNDED" },
     });
   });
   revalidatePath("/admin/orders");
