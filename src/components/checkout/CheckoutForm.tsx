@@ -111,6 +111,29 @@ export function CheckoutForm() {
         return;
       }
       const ok = data as CheckoutResponse;
+
+      // For card-based payments — create the provider payment and redirect.
+      if (payment === "LIQPAY" || payment === "MONOBANK") {
+        const path = payment === "LIQPAY"
+          ? "/api/payments/liqpay/create"
+          : "/api/payments/mono/create";
+        const payRes = await fetch(path, {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ orderNumber: ok.orderNumber, locale }),
+        });
+        const payData = await payRes.json();
+        if (!payRes.ok) {
+          setError(t("errors.GENERIC"));
+          setSubmitting(false);
+          return;
+        }
+        clearCart();
+        window.location.href = payData.redirectUrl as string;
+        return;
+      }
+
+      // COD — straight to success page.
       clearCart();
       router.push(`/checkout/success?order=${encodeURIComponent(ok.orderNumber)}`);
     } catch {
