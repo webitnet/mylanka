@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Cormorant_SC, Lora } from "next/font/google";
+import { Cormorant_Garamond, Inter } from "next/font/google";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import "../globals.css";
+import "../../globals.css";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -16,18 +16,10 @@ const cormorant = Cormorant_Garamond({
   display: "swap",
 });
 
-const cormorantSc = Cormorant_SC({
-  variable: "--font-cormorant-sc",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin", "cyrillic"],
   weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
-
-const lora = Lora({
-  variable: "--font-lora",
-  subsets: ["latin", "cyrillic"],
-  weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -55,7 +47,7 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      className={`${cormorant.variable} ${cormorantSc.variable} ${lora.variable} h-full antialiased`}
+      className={`${cormorant.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-parchment text-ink">
         <NextIntlClientProvider>
