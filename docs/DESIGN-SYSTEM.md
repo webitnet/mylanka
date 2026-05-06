@@ -1,45 +1,52 @@
-# Design System — Рідне
+# Design System — Миланка
 
 ## Brand
 
-- **Name:** Рідне (Ridne)
-- **Tagline UA:** Handmade · Україна · Сувеніри
-- **Tagline EN:** Handmade Ukrainian Souvenirs
-- **Tone:** Warm, authentic, handcrafted feel. Not corporate. Not trendy. Timeless.
+- **Name:** Миланка (Mylanka)
+- **Tagline UA:** Вишиванки ◆ Сувеніри ◆ Обереги
+- **Tagline EN:** Embroidery ◆ Souvenirs ◆ Charms
+- **Sub-tagline UA:** Традиції, що живуть у серці
+- **Sub-tagline EN:** Traditions that live in the heart
+- **Tone:** Warm, traditional, hand-stitched, folk. Not corporate. Not minimalist. Authentic Ukrainian craft.
 
 ## Color Palette
 
+The palette is drawn from a Ukrainian craft tag — parchment paper background, red embroidery thread, brass eyelet, ink illustrations of countryside (хата) and viburnum berries (калина).
+
 ```css
 :root {
-  /* Primary */
-  --color-bark:       #3D2B1F;   /* Dark brown — nav, dark backgrounds, text */
-  --color-terracotta: #C8593A;   /* Warm red-brown — primary CTAs, accents */
-  --color-gold:       #D4A843;   /* Warm gold — secondary accent, highlights */
+  /* Primary brand */
+  --color-bark:        #3A2A1C;   /* Dark brown — header bg, brand text, logo wordmark */
+  --color-embroidery:  #A8252E;   /* Embroidery red — primary CTAs, accents (formerly "terracotta") */
+  --color-berry:       #C7373E;   /* Kalyna berry red — secondary accent, badges */
+  --color-olive:       #7A622E;   /* Foliage olive-brown — success, nature accents */
+  --color-brass:       #A88B4F;   /* Brass eyelet — gold accent, brand highlights */
 
-  /* Secondary */
-  --color-sage:       #7A9E7E;   /* Muted green — success, nature accents */
-  --color-wheat:      #F2E4C4;   /* Warm beige — card backgrounds */
-  --color-cream:      #FAF5EC;   /* Off-white — page background */
+  /* Surfaces */
+  --color-linen:       #F5EAD2;   /* Linen-warm — card bg, raised surfaces */
+  --color-parchment:   #FBF5E5;   /* Parchment — page background */
 
   /* Neutrals */
-  --color-ink:        #1E1510;   /* Near-black — body text */
-  --color-muted:      #8B7D6B;   /* Warm gray — secondary text */
-  --color-border:     #E0D5C7;   /* Light warm — borders, dividers */
+  --color-ink:         #1F1812;   /* Deep ink — body text */
+  --color-muted:       #8B7853;   /* Warm gray — secondary text */
+  --color-border:      #DCCDA8;   /* Soft warm — borders, dividers */
 
   /* Semantic */
-  --color-error:      #C8593A;
-  --color-success:    #7A9E7E;
-  --color-warning:    #D4A843;
+  --color-error:       #A8252E;   /* embroidery */
+  --color-success:     #7A622E;   /* olive */
+  --color-warning:     #A88B4F;   /* brass */
 }
 ```
 
 ## Typography
 
 ```css
---font-display: 'Playfair Display', Georgia, serif;    /* Headings */
---font-ui: 'Unbounded', system-ui, sans-serif;          /* Labels, subheadings, UI */
---font-body: 'Martel', Georgia, serif;                   /* Body text */
+--font-display: 'Cormorant Garamond', Georgia, serif;   /* Wordmark, headings (italic for brand) */
+--font-ui:      'Cormorant SC', Georgia, serif;          /* Small caps — labels, nav, buttons */
+--font-body:    'Lora', Georgia, serif;                   /* Body text, paragraphs */
 ```
+
+All three are loaded via `next/font/google` with Cyrillic + Latin subsets.
 
 **Scale:**
 | Token | Size | Use |
@@ -53,33 +60,48 @@
 | `text-3xl` | 40px | H1 |
 | `text-4xl` | 56px | Hero |
 
-## Logo
+Wordmark "Миланка" uses **Cormorant Garamond Bold Italic (700)** with cursive feel — replace with custom SVG once the brand artist delivers the final wordmark.
 
-Two elements:
-1. **Emblem:** Circular motif — stylized sunflower/embroidery with 8 petals (4 gold `#D4A843`, 4 terracotta `#C8593A`) inside a dashed circle. Solid gold center.
-2. **Wordmark:** "Рідне" in Playfair Display Bold. "не" portion in italic gold.
+## Logo & Wordmark
 
-Three variants:
-- Dark bg → gold emblem + wheat wordmark
-- Light bg → bark emblem + bark wordmark
-- Terracotta bg → cream emblem + cream wordmark
+Wordmark: **«Миланка»** in Cormorant Garamond Bold Italic (700), warm brown color (`--color-bark`) on light surfaces, brass (`--color-brass`) on dark surfaces.
+
+Optional emblem (future): a small inked illustration of a Ukrainian хата (cottage) flanked by viburnum sprigs, framed by a cross-stitch border. Reserved for the etiquette/print application; web uses just the wordmark for clarity.
+
+Variants:
+- Dark bg → wordmark in `--color-brass`
+- Light bg → wordmark in `--color-bark`
+- Embroidery-red bg → wordmark in `--color-parchment`
 
 ## UI Components
 
 | Element | Spec |
 |---------|------|
-| **Button (primary)** | `bg-terracotta text-cream` rounded-sm, Unbounded font, uppercase, tracking-wide |
-| **Button (secondary)** | `border-bark text-bark` transparent, hover → `bg-bark text-cream` |
-| **Card** | `bg-white border-border` hover → shadow-lg + scale-[1.01] |
-| **Input** | `bg-cream border-border` focus → `border-terracotta` ring |
-| **Badge** | `bg-wheat text-bark` Unbounded, uppercase, text-xs |
+| **Button (primary)** | `bg-embroidery text-parchment` rounded-sm, Cormorant SC, uppercase, tracking-wide |
+| **Button (secondary)** | `border-bark text-bark` transparent, hover → `bg-bark text-parchment` |
+| **Card** | `bg-linen border-border` hover → shadow-lg + scale-[1.01] |
+| **Input** | `bg-parchment border-border` focus → `border-embroidery` ring |
+| **Badge (default)** | `bg-linen text-bark` Cormorant SC, uppercase, text-xs |
+| **Badge (new)** | `bg-olive text-parchment` |
+| **Badge (sale)** | `bg-embroidery text-parchment` |
+| **Badge (featured)** | `bg-brass text-bark` |
 | **Product image** | Aspect ratio 4:5, warm overlay on hover |
-| **Page background** | `bg-cream` (#FAF5EC) |
-| **Navigation** | Sticky top, `bg-bark` with gold/wheat text |
+| **Page background** | `bg-parchment` (#FBF5E5) |
+| **Navigation** | Sticky top, `bg-bark` with brass/parchment text |
 
-## Decorative
+## Decorative / Ornaments
 
-- Embroidery-inspired grid pattern for section dividers
-- Dashed circle borders (logo motif) for accents
-- Warm grain/noise texture on hero sections
-- Ukrainian ornamental dividers between sections
+Implemented as inline SVG components in `src/components/ornaments/`:
+
+- **Cross-stitch divider** — horizontal vyshyvka pattern in embroidery-red on parchment, used between hero and content sections, before footer
+- **Diamond bullet `◆`** — used in the brand tagline as a separator between words ("Вишиванки ◆ Сувеніри ◆ Обереги"). Color: `--color-embroidery`
+- **Heart `♥`** — small embroidery-red heart used in the footer ("Made with ♥ in Ukraine")
+- **Cottage silhouette** — minimal line illustration available for About page hero
+- **Kalyna sprig** — corner decoration for success pages and order confirmations (red berries on olive stems)
+- **Cross-stitch border frame** — wraps hero/about sections, evoking the etiquette tag look
+
+Decorative motifs use `--color-embroidery` and `--color-berry` for red elements, `--color-olive` for foliage, on `--color-parchment` or `--color-linen` background. Avoid placing them on `--color-bark` (low contrast).
+
+## Texture
+
+The page background may carry a subtle parchment grain texture (CSS `background-image` with a low-opacity noise SVG) for the etiquette-paper feel. Skip on mobile to keep performance light.

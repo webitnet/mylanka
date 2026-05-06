@@ -1,6 +1,10 @@
-# RIDNE — Рідне | Handmade Ukrainian Souvenirs
+# MYLANKA — Миланка | Handmade Ukrainian Souvenirs
 
-Online store for an existing offline souvenir shop selling handmade Ukrainian crafts, ceramics, textiles, and regional gifts. Primary audience: tourists (international + Ukrainian).
+Online store for an existing offline souvenir shop selling handmade Ukrainian crafts: vyshyvanky, ceramics, woodwork, jewelry, charms (oberehy), and regional gifts. Primary audience: tourists (international + Ukrainian).
+
+**Tagline UA:** Вишиванки ◆ Сувеніри ◆ Обереги
+**Tagline EN:** Embroidery ◆ Souvenirs ◆ Charms
+**Sub-tagline:** Традиції, що живуть у серці / Traditions that live in the heart
 
 ## Stack
 
@@ -17,14 +21,14 @@ Online store for an existing offline souvenir shop selling handmade Ukrainian cr
 ## Project Structure
 
 ```
-ridne/
+mylanka/
 ├── prisma/              # DB schema + migrations + seed
 ├── src/
 │   ├── app/
 │   │   ├── [locale]/    # Public store (uk/en)
 │   │   ├── admin/       # Admin panel
 │   │   └── api/         # API routes + webhooks
-│   ├── components/      # React components (ui/, layout/, products/, cart/, checkout/, admin/)
+│   ├── components/      # React components (ui/, layout/, products/, cart/, checkout/, ornaments/, admin/)
 │   ├── lib/             # Utilities (prisma, auth, payments, novaposhta, feeds)
 │   ├── hooks/           # Custom hooks
 │   ├── messages/        # i18n (uk.json, en.json)
@@ -45,7 +49,7 @@ ridne/
 6. **Error format.** API errors: `{ "error": { "code": "PRODUCT_NOT_FOUND", "message": "..." } }`
 7. **Git.** Conventional commits. One feature per branch.
 8. **Images.** Next.js `<Image>` with responsive sizes: 200px (thumb), 400px (card), 800px (detail), 1200px (full).
-9. **Order numbers.** Format: `RDN-YYYYMMDD-NNN` (e.g., `RDN-20260504-001`).
+9. **Order numbers.** Format: `MLN-YYYYMMDD-NNN` (e.g., `MLN-20260506-001`).
 10. **No hardcoded strings.** All UI text goes through i18n. All config goes through env vars.
 
 ## Phases
@@ -54,7 +58,7 @@ Work through phases sequentially. See `docs/` for detailed specs:
 
 | Phase | File | Scope |
 |-------|------|-------|
-| 0 | `docs/DESIGN-SYSTEM.md` | Brand colors, fonts, UI components |
+| 0 | `docs/DESIGN-SYSTEM.md` | Brand colors, fonts, UI components, ornaments |
 | 1 | `docs/ARCHITECTURE.md` | DB schema, project setup, seed data |
 | 2 | `docs/PHASE-1-STORE.md` | Catalog, cart, checkout, i18n, SEO |
 | 3 | `docs/PHASE-2-PAYMENTS.md` | LiqPay, Monobank, webhooks |
