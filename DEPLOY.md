@@ -6,11 +6,12 @@ End-to-end production deployment for the three services:
 |---|---|---|
 | Web store + admin + API | Vercel | repo root (Next.js) |
 | Telegram Mini App (static) | Vercel | `telegram-miniapp/` |
-| Telegram bot (long-running process) | Railway | `src/bot/` |
+| Telegram bot (long-running process) | VDS (thehost.com.ua) via pm2 | `src/bot/` |
 | Database | Supabase | (already provisioned) |
 | Object storage | Cloudflare R2 | (already provisioned) |
 
-DNS terminus: `mylanka.com.ua` (apex + `tg.` + `cdn.` subdomains).
+DNS terminus: `mylanka.com.ua` — managed via **thehost.com.ua** DNS panel
+(apex + `tg.` + optional `cdn.` subdomains).
 
 ---
 
@@ -18,10 +19,10 @@ DNS terminus: `mylanka.com.ua` (apex + `tg.` + `cdn.` subdomains).
 
 Accounts you should have ready:
 
-- [x] **GitHub** — repo already pushed (`webitnet/mylanka`).
-- [ ] **Vercel** — sign in with GitHub.
-- [ ] **Railway** — sign in with GitHub. Free hobby tier ($5/mo credit) is enough for the bot.
-- [ ] **Cloudflare** — DNS for `mylanka.com.ua` should be on Cloudflare (recommended) or another DNS host.
+- [x] **GitHub** — repo already pushed (`webitnet/mylanka`, private).
+- [x] **Vercel** — project imported from the GitHub repo.
+- [x] **VDS (thehost.com.ua)** — already running other bots; bot will live here under pm2.
+- [x] **DNS** — managed via thehost.com.ua DNS panel.
 
 Local sanity check before deploying:
 
@@ -85,41 +86,93 @@ Separate Vercel project, same repo.
 
 ---
 
-## 4. Deploy the bot (Railway)
+## 4. Deploy the bot (VDS via pm2)
 
-The bot uses long polling, so it needs an always-on process. Vercel Functions
-can't host this — use Railway.
+The bot uses long polling — a plain Node.js process that needs to stay
+running. On the VDS (thehost.com.ua) you already use pm2 for other bots;
+we follow the same pattern.
 
-1. Railway → **New Project** → **Deploy from GitHub repo** → pick `mylanka`.
-2. Service name: `mylanka-bot`.
-3. **Settings → Build**:
-   - Build command: `npm ci && npx prisma generate`
-   - Start command: `npm run bot:start`
-4. **Variables** — add the same env block from `.env.example`. The bot only
-   *needs* a subset: `DATABASE_URL`, `DIRECT_URL`, `TELEGRAM_BOT_TOKEN`,
-   `TELEGRAM_ADMIN_CHAT_ID`, `PUBLIC_BASE_URL=https://mylanka.com.ua`,
-   `TELEGRAM_LINK_BASE_URL=https://mylanka.com.ua`. Adding the rest is safe.
-5. Deploy. Logs should show:
-   ```
-   [bot] starting (polling)…
-   [bot] @mylanka_shop_bot ready
-   ```
-6. Verify in Telegram: `/start` to the bot in DM.
+### One-time setup on the VDS
+
+```bash
+# As the deploy user, in the home dir or /srv:
+git clone git@github.com:webitnet/mylanka.git mylanka
+cd mylanka
+
+# Node 20+ required.
+node --version
+
+# Install deps and generate the Prisma client.
+npm ci
+npx prisma generate
+
+# Create the runtime .env. Minimum required keys for the bot:
+cat > .env <<'EOF'
+DATABASE_URL="postgresql://...@aws-1-eu-central-1.pooler.supabase.com:6543/postgres?pgbouncer=true&connection_limit=1"
+DIRECT_URL="postgresql://...@aws-1-eu-central-1.pooler.supabase.com:5432/postgres"
+TELEGRAM_BOT_TOKEN="..."
+TELEGRAM_ADMIN_CHAT_ID="-1003510345800"
+PUBLIC_BASE_URL="https://mylanka.com.ua"
+TELEGRAM_LINK_BASE_URL="https://mylanka.com.ua"
+EOF
+chmod 600 .env
+
+# Start under pm2 (ecosystem.config.cjs is committed at repo root).
+pm2 start ecosystem.config.cjs
+pm2 logs mylanka-bot          # tail logs — should see "@mylanka_shop_bot ready"
+
+# Persist across reboots:
+pm2 save
+pm2 startup                   # follow the printed command (sudo systemctl ...)
+```
+
+### Re-deploy after a code change
+
+```bash
+cd /path/to/mylanka
+git pull
+npm ci
+npx prisma generate           # only if schema changed
+pm2 reload mylanka-bot
+```
+
+The bot polls Telegram directly — no public ingress needed on the VDS,
+no firewall rules to open. Only outbound HTTPS to api.telegram.org,
+the Supabase pooler, and (for /orders / notifications) mylanka.com.ua.
+
+### Cohabiting with other bots
+
+`pm2 list` should show `mylanka-bot` alongside your existing processes,
+each isolated by `cwd`. Logs are scoped per app (`pm2 logs mylanka-bot`).
+Memory footprint of the bot is ~80 MB.
 
 ---
 
-## 5. DNS summary
+## 5. DNS — thehost.com.ua
+
+Inside the thehost DNS panel for `mylanka.com.ua`, add the records below
+(values come from Vercel after you bind the custom domain — Vercel shows
+exact targets in **Settings → Domains**).
 
 | Host | Type | Target | Notes |
 |---|---|---|---|
-| `mylanka.com.ua` | A/CNAME | Vercel | Main store + admin + API |
-| `www.mylanka.com.ua` | CNAME | Vercel | Redirect → apex |
-| `tg.mylanka.com.ua` | CNAME | Vercel | Mini App |
-| `cdn.mylanka.com.ua` | CNAME | R2 custom domain | Optional — pretty image URLs |
+| `mylanka.com.ua` (apex / `@`) | A | `76.76.21.21` (Vercel) | Main store + admin + API |
+| `www.mylanka.com.ua` | CNAME | `cname.vercel-dns.com.` | Vercel will auto-redirect to apex |
+| `tg.mylanka.com.ua` | CNAME | `cname.vercel-dns.com.` | Mini App (separate Vercel project) |
+| `cdn.mylanka.com.ua` | CNAME | R2 endpoint | Optional — pretty image URLs |
+
+Workflow:
+1. In Vercel, **Settings → Domains** → add `mylanka.com.ua`. Vercel shows
+   the exact A / CNAME values it expects.
+2. In thehost panel, switch the domain's NS to thehost's DNS servers (if not
+   already), then add the records above with TTL 300–3600.
+3. Wait ~5–30 min for propagation. Vercel will auto-issue Let's Encrypt SSL
+   once it can resolve the host.
 
 (R2 → Cloudflare dashboard → bucket → **Settings** → **Custom Domain** → add
-`cdn.mylanka.com.ua` → set `R2_PUBLIC_URL=https://cdn.mylanka.com.ua` in Vercel
-env once active.)
+`cdn.mylanka.com.ua`. Cloudflare gives you a CNAME to point at from thehost
+panel. Once green, set `R2_PUBLIC_URL=https://cdn.mylanka.com.ua` in Vercel
+env.)
 
 ---
 
