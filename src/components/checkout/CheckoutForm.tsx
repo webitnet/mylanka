@@ -20,6 +20,11 @@ import type { CheckoutResponse } from "@/app/api/checkout/route";
 type ShippingMethod = "NOVA_POSHTA" | "UKRPOSHTA" | "SELF_PICKUP" | "INTERNATIONAL";
 type PaymentMethod = "LIQPAY" | "MONOBANK" | "CASH_ON_DELIVERY";
 
+const LIQPAY_ENABLED = process.env.NEXT_PUBLIC_LIQPAY_ENABLED === "true";
+const PAYMENT_METHODS: PaymentMethod[] = LIQPAY_ENABLED
+  ? ["CASH_ON_DELIVERY", "LIQPAY", "MONOBANK"]
+  : ["CASH_ON_DELIVERY", "MONOBANK"];
+
 export function CheckoutForm() {
   const locale = useLocale() as "uk" | "en";
   const t = useTranslations("Checkout");
@@ -240,7 +245,7 @@ export function CheckoutForm() {
         {/* Payment */}
         <Section title={t("paymentSection")}>
           <div className="grid gap-2">
-            {(["CASH_ON_DELIVERY", "LIQPAY", "MONOBANK"] as PaymentMethod[]).map((p) => (
+            {PAYMENT_METHODS.map((p) => (
               <RadioCard
                 key={p}
                 checked={payment === p}

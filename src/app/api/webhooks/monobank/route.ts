@@ -44,7 +44,9 @@ export async function POST(req: Request) {
   // Locate order via the Payment row's externalId (set when invoice was created).
   const payment = await prisma.payment.findFirst({
     where: { provider: "MONOBANK", externalId: body.invoiceId },
-    include: { order: { select: { id: true, paymentStatus: true } } },
+    include: {
+      order: { select: { id: true, paymentStatus: true, orderNumber: true } },
+    },
   });
 
   if (!payment) {
@@ -81,6 +83,18 @@ export async function POST(req: Request) {
       });
     }
   });
+
+  if (isPaid) {
+    const { paymentReceivedMessage } = await import("@/lib/telegram/messages");
+    const { notifyAdmin } = await import("@/lib/telegram/notify");
+    notifyAdmin(
+      paymentReceivedMessage({
+        orderNumber: payment.order.orderNumber,
+        provider: "MONOBANK",
+        amount: payment.amount,
+      }),
+    );
+  }
 
   return NextResponse.json({ ok: true });
 }

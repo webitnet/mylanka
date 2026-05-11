@@ -3,6 +3,7 @@
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
+import { ImageUploader } from "./ImageUploader";
 import type { ProductInputT } from "@/lib/admin/products";
 
 export type ProductFormDefaults = Partial<ProductInputT> & {
@@ -68,9 +69,7 @@ export function ProductForm({
   const [metaTitleEn, setMetaTitleEn] = useState(defaults.metaTitleEn ?? "");
   const [metaDescUk, setMetaDescUk] = useState(defaults.metaDescUk ?? "");
   const [metaDescEn, setMetaDescEn] = useState(defaults.metaDescEn ?? "");
-  const [imageUrlsText, setImageUrlsText] = useState(
-    (defaults.imageUrls ?? []).join("\n"),
-  );
+  const [imageUrls, setImageUrls] = useState<string[]>(defaults.imageUrls ?? []);
 
   function uahToKopecks(s: string): number | null {
     const trimmed = s.trim();
@@ -115,18 +114,6 @@ export function ProductForm({
     }
     if (weightNum !== null && (!Number.isInteger(weightNum) || weightNum < 0)) {
       return { error: "Вага має бути цілим числом ≥ 0" };
-    }
-
-    const imageUrls = imageUrlsText
-      .split("\n")
-      .map((s) => s.trim())
-      .filter(Boolean);
-    for (const url of imageUrls) {
-      try {
-        new URL(url);
-      } catch {
-        return { error: `Невалідне посилання на зображення: ${url}` };
-      }
     }
 
     return {
@@ -281,8 +268,8 @@ export function ProductForm({
         </Grid3>
       </Section>
 
-      <Section title="Зображення" hint="По одному URL на рядок (макс. 10). Перше — головне.">
-        <textarea className="input font-mono text-xs" rows={5} value={imageUrlsText} onChange={(e) => setImageUrlsText(e.target.value)} placeholder="https://example.com/image-1.jpg&#10;https://example.com/image-2.jpg" />
+      <Section title="Зображення" hint="Перше зображення — головне. Файли зберігаються в Cloudflare R2.">
+        <ImageUploader urls={imageUrls} onChange={setImageUrls} max={10} />
       </Section>
 
       <Section title="SEO">

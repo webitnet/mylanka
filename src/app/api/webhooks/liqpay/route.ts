@@ -115,5 +115,17 @@ export async function POST(req: Request) {
     }
   });
 
+  if (isPaid) {
+    const { paymentReceivedMessage } = await import("@/lib/telegram/messages");
+    const { notifyAdmin } = await import("@/lib/telegram/notify");
+    notifyAdmin(
+      paymentReceivedMessage({
+        orderNumber: payload.order_id,
+        provider: "LIQPAY",
+        amount: Math.round(payload.amount * 100),
+      }),
+    );
+  }
+
   return NextResponse.json({ ok: true });
 }

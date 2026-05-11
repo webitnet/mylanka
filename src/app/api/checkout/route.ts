@@ -161,6 +161,28 @@ export async function POST(req: Request) {
 
         return order;
       });
+
+      // Fire-and-forget Telegram admin notification
+      const { newOrderMessage } = await import("@/lib/telegram/messages");
+      const { notifyAdmin } = await import("@/lib/telegram/notify");
+      notifyAdmin(
+        newOrderMessage({
+          orderId: created.id,
+          orderNumber: created.orderNumber,
+          firstName: body.contact.firstName,
+          lastName: body.contact.lastName,
+          email: body.contact.email,
+          phone: body.contact.phone,
+          itemsCount: body.items.reduce((a, b) => a + b.qty, 0),
+          total: created.total,
+          paymentMethod: body.payment,
+          shippingMethod: shippingFields.shippingMethod,
+          npCity: shippingFields.npCity,
+          npWarehouse: shippingFields.npWarehouse,
+          shippingAddress: shippingFields.shippingAddress,
+        }),
+      );
+
       return NextResponse.json<CheckoutResponse>({ orderNumber: created.orderNumber });
     } catch (e) {
       if (
