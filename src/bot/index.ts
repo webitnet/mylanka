@@ -16,6 +16,7 @@ import { onStart } from "./handlers/start";
 import { onCatalog } from "./handlers/catalog";
 import { onOrders } from "./handlers/orders";
 import { onHelp } from "./handlers/help";
+import { onInlineQuery } from "./handlers/inline";
 
 function main() {
   const token = process.env.TELEGRAM_BOT_TOKEN;
@@ -30,6 +31,7 @@ function main() {
   bot.command("catalog", onCatalog);
   bot.command("orders", onOrders);
   bot.command("help", onHelp);
+  bot.on("inline_query", onInlineQuery);
 
   bot.catch((err) => {
     console.error("[bot] handler error", err);
