@@ -21,15 +21,39 @@ export async function notifyAdmin(html: string): Promise<void> {
     console.warn("[tg notify] missing TELEGRAM_BOT_TOKEN or TELEGRAM_ADMIN_CHAT_ID");
     return;
   }
+  await sendMessage(cfg.token, cfg.chatId, html);
+}
+
+/** Send a message to an arbitrary chat (e.g. customer DM by telegramId). */
+export async function notifyChat(
+  chatId: string | number,
+  html: string,
+  opts?: { replyMarkup?: object },
+): Promise<void> {
+  const token = process.env.TELEGRAM_BOT_TOKEN;
+  if (!token) {
+    console.warn("[tg notify] missing TELEGRAM_BOT_TOKEN");
+    return;
+  }
+  await sendMessage(token, chatId, html, opts);
+}
+
+async function sendMessage(
+  token: string,
+  chatId: string | number,
+  html: string,
+  opts?: { replyMarkup?: object },
+): Promise<void> {
   try {
-    const res = await fetch(`${API_BASE}/bot${cfg.token}/sendMessage`, {
+    const res = await fetch(`${API_BASE}/bot${token}/sendMessage`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        chat_id: cfg.chatId,
+        chat_id: chatId,
         text: html,
         parse_mode: "HTML",
         disable_web_page_preview: true,
+        ...(opts?.replyMarkup ? { reply_markup: opts.replyMarkup } : {}),
       }),
       cache: "no-store",
     });

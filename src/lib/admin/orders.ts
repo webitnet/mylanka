@@ -145,6 +145,35 @@ export async function listOrdersForExport(
 
 const TERMINAL: OrderStatus[] = ["CANCELLED", "REFUNDED"];
 
+/**
+ * Fire-and-forget Telegram notification to the Customer linked to an order.
+ * Skips silently when no Customer.telegramId is on file (web-only guest order).
+ */
+async function notifyCustomerForOrder(
+  orderId: string,
+  build: (order: {
+    orderNumber: string;
+    total: number;
+    trackingNumber: string | null;
+    shippingMethod: string;
+  }) => string,
+) {
+  const order = await prisma.order.findUnique({
+    where: { id: orderId },
+    select: {
+      orderNumber: true,
+      total: true,
+      trackingNumber: true,
+      shippingMethod: true,
+      customer: { select: { telegramId: true } },
+    },
+  });
+  const telegramId = order?.customer?.telegramId;
+  if (!order || !telegramId) return;
+  const { notifyChat } = await import("@/lib/telegram/notify");
+  notifyChat(telegramId, build(order));
+}
+
 async function assertNotTerminal(id: string) {
   const order = await prisma.order.findUnique({
     where: { id },
@@ -166,6 +195,10 @@ export async function confirmOrder(id: string) {
     where: { id },
     data: { status: "CONFIRMED" },
   });
+  const { orderConfirmedMessage } = await import("@/lib/telegram/customerMessages");
+  notifyCustomerForOrder(id, (o) =>
+    orderConfirmedMessage({ orderNumber: o.orderNumber, total: o.total }),
+  );
   revalidatePath("/admin/orders");
   revalidatePath(`/admin/orders/${id}`);
 }
@@ -194,6 +227,14 @@ export async function shipOrder(id: string, trackingNumber: string) {
     where: { id },
     data: { status: "SHIPPED", trackingNumber: trimmed },
   });
+  const { orderShippedMessage } = await import("@/lib/telegram/customerMessages");
+  notifyCustomerForOrder(id, (o) =>
+    orderShippedMessage({
+      orderNumber: o.orderNumber,
+      trackingNumber: o.trackingNumber ?? trimmed,
+      shippingMethod: o.shippingMethod,
+    }),
+  );
   revalidatePath("/admin/orders");
   revalidatePath(`/admin/orders/${id}`);
 }
@@ -207,6 +248,10 @@ export async function markDelivered(id: string) {
     where: { id },
     data: { status: "DELIVERED" },
   });
+  const { orderDeliveredMessage } = await import("@/lib/telegram/customerMessages");
+  notifyCustomerForOrder(id, (o) =>
+    orderDeliveredMessage({ orderNumber: o.orderNumber }),
+  );
   revalidatePath("/admin/orders");
   revalidatePath(`/admin/orders/${id}`);
 }
@@ -246,6 +291,10 @@ export async function cancelOrder(id: string) {
       data: { status: "CANCELLED" },
     });
   });
+  const { orderCancelledMessage } = await import("@/lib/telegram/customerMessages");
+  notifyCustomerForOrder(id, (o) =>
+    orderCancelledMessage({ orderNumber: o.orderNumber }),
+  );
   revalidatePath("/admin/orders");
   revalidatePath(`/admin/orders/${id}`);
 }
@@ -296,6 +345,10 @@ export async function refundOrder(id: string) {
       data: { status: "REFUNDED", paymentStatus: "REFUNDED" },
     });
   });
+  const { orderRefundedMessage } = await import("@/lib/telegram/customerMessages");
+  notifyCustomerForOrder(id, (o) =>
+    orderRefundedMessage({ orderNumber: o.orderNumber, total: o.total }),
+  );
   revalidatePath("/admin/orders");
   revalidatePath(`/admin/orders/${id}`);
 }

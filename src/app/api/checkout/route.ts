@@ -4,6 +4,7 @@ import { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { apiError } from "@/lib/apiError";
 import { generateOrderNumber } from "@/lib/orders";
+import { authenticateTelegram, readInitDataFromRequest } from "@/lib/telegram/auth";
 
 const ItemSchema = z.object({
   slug: z.string().min(1),
@@ -55,6 +56,31 @@ export async function POST(req: Request) {
     return apiError("INVALID_BODY", parsed.error.message, 400);
   }
   const body = parsed.data;
+
+  // Telegram Mini App auto-link: if a valid initData header is present,
+  // resolve to the Customer so the order is owned by them. Web checkouts
+  // (no header) go through as guest orders — Customer is null.
+  const initData = readInitDataFromRequest(req);
+  let customerId: string | null = null;
+  let source: "WEB" | "TELEGRAM" = "WEB";
+  if (initData) {
+    const auth = await authenticateTelegram(initData);
+    if (auth.ok) {
+      customerId = auth.customer.id;
+      source = "TELEGRAM";
+      // Backfill missing phone/email so /orders matching works.
+      await prisma.customer.update({
+        where: { id: customerId },
+        data: {
+          phone: auth.customer.phone ?? body.contact.phone,
+          email: auth.customer.email ?? body.contact.email,
+        },
+      });
+    } else if (auth.status !== 401) {
+      // 401 = invalid initData; ignore and fall back to guest. 500 = config issue.
+      console.warn("[checkout] telegram auth failed", auth.code);
+    }
+  }
 
   if (body.items.length === 0) {
     return apiError("EMPTY_CART", "Cart is empty", 400);
@@ -144,7 +170,8 @@ export async function POST(req: Request) {
             total: subtotal,
             status: "PENDING",
             paymentStatus: "UNPAID",
-            source: "WEB",
+            source,
+            customerId,
             items: { create: orderItemsData },
           },
         });
