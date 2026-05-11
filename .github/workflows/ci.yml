@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  next-app:
+    name: Type-check & lint (Next.js)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+      - run: npm ci
+      - name: Generate Prisma client
+        run: npx prisma generate
+      - run: npm run type-check
+      - run: npm run lint
+
+  miniapp:
+    name: Type-check & build (Mini App)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: telegram-miniapp
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: telegram-miniapp/package-lock.json
+      - run: npm ci
+      - run: npm run build
