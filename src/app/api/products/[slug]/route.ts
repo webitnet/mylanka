@@ -65,5 +65,10 @@ export async function GET(
     images: product.images,
     category: product.category,
   };
-  return NextResponse.json(res, { headers: { "Cache-Control": "no-store" } });
+  return NextResponse.json(res, {
+    headers: {
+      "Cache-Control":
+        "public, max-age=0, s-maxage=300, stale-while-revalidate=86400",
+    },
+  });
 }

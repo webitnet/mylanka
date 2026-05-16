@@ -13,6 +13,11 @@ import { routing } from "@/i18n/routing";
 import { prisma } from "@/lib/prisma";
 import { toCardData } from "@/lib/catalog";
 
+// ISR: re-render at most once an hour. Crawlers serve cached HTML
+// from the CDN without spinning up a function on each hit.
+export const revalidate = 3600;
+export const dynamicParams = true; // unknown slugs still SSR + cache
+
 export async function generateStaticParams() {
   const products = await prisma.product.findMany({
     where: { isActive: true },

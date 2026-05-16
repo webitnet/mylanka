@@ -1,6 +1,9 @@
 import type { MetadataRoute } from "next";
 import { prisma } from "@/lib/prisma";
 
+// Crawler-friendly: regenerate at most once per day.
+export const revalidate = 86400;
+
 const STATIC_PATHS = ["", "/products", "/categories", "/about", "/contact", "/shipping"];
 
 function baseUrl(): string {

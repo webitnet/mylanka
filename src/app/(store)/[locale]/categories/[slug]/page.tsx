@@ -8,6 +8,9 @@ import { CatalogView } from "@/components/products/CatalogView";
 import { routing } from "@/i18n/routing";
 import { prisma } from "@/lib/prisma";
 
+export const revalidate = 3600;
+export const dynamicParams = true;
+
 export async function generateStaticParams() {
   const cats = await prisma.category.findMany({
     where: { isActive: true },

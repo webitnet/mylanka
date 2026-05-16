@@ -87,7 +87,13 @@ export async function GET(req: Request) {
     pageCount: Math.max(1, Math.ceil(total / perPage)),
   };
 
+  // CDN-cache catalog responses for 5 min, allow stale-while-revalidate
+  // up to a day. Mini-app and bots hitting the same query are served
+  // from the edge without spinning up a function.
   return NextResponse.json(res, {
-    headers: { "Cache-Control": "no-store" },
+    headers: {
+      "Cache-Control":
+        "public, max-age=0, s-maxage=300, stale-while-revalidate=86400",
+    },
   });
 }
